@@ -85,25 +85,25 @@ use {
       vim.api.nvim_set_keymap(
         "n",
         "<Leader>yv",
-        "<Cmd>lua Y.view()<CR>",
+        "<Cmd>lua require("yaml_nvim").view()<CR>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<Leader>YY",
-        "<Cmd>lua Y.yank_path()<CR>",
+        "<Cmd>lua require("yaml_nvim").yank_path()<CR>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<Leader>yy",
-        "<Cmd>lua Y.yank()<CR>",
+        "<Cmd>lua require("yaml_nvim").yank()<CR>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<Leader>y",
-        "<Cmd>lua Y.telescope()<CR>",
+        "<Cmd>lua require("yaml_nvim").telescope()<CR>",
         { noremap = true, silent = true }
       )
   end
