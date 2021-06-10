@@ -57,7 +57,7 @@ use {
   "cuducos/yaml.nvim",
   requires = {
     "nvim-treesitter/nvim-treesitter",
-    "nvim-telescope/telescope.nvim"
+    "nvim-telescope/telescope.nvim" -- optional
   }
 }
 ```

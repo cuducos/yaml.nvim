@@ -1,5 +1,5 @@
 local ts_utils = require("nvim-treesitter.ts_utils")
-local M = {} -- a namespace for this module
+local M = {}
 
 local function reverse(keys)
   local n = #keys
@@ -36,19 +36,16 @@ local function get_keys(node, bufnr)
   return table.concat(keys, ".")
 end
 
-local function parse()
+M.parse = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local node = ts_utils.get_node_at_cursor(nil)
-  return {key = get_keys(node, bufnr), value = get_value(node, bufnr)}
-end
-
-M.view = function()
-  local node = parse()
-  print(string.format("%s = %s", node["key"], node["value"]))
-end
-
-M.init = function()
-  vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
+  local key = get_keys(node, bufnr)
+  local value = get_value(node, bufnr)
+  return {
+    key = key,
+    value = value,
+    as_string = string.format("%s = %s", key, value),
+  }
 end
 
 return M
