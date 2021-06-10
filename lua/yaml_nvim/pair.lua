@@ -36,14 +36,30 @@ local function get_keys(node, bufnr)
   return table.concat(keys, ".")
 end
 
+local function get_position(node, bufnr)
+  while node ~= nil do
+    if node:type() == "block_mapping_pair" then
+      local key = node:field("key")[1]
+      local line, column = key:start()
+      return {line = line + 1, column = column}
+    end
+
+    node = node:parent()
+  end
+end
+
 M.parse = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local node = ts_utils.get_node_at_cursor(nil)
+
   local key = get_keys(node, bufnr)
   local value = get_value(node, bufnr)
+  local position = get_position(node, bufnr)
+
   return {
     key = key,
     value = value,
+    position = position,
     as_string = string.format("%s = %s", key, value),
   }
 end
