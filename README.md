@@ -5,10 +5,13 @@ Simple tools to help developers working YAML in [Neovim](https://neovim.io):
 | Command | Description |
 |:--|:--|
 | `:YAMLView` | Shows the full path and value of the current key/value pair (**TODO** support array indexes) |
-| `:YAMLYank` | **TODO** Yanks the full path and value of the current key/value pair |
-| `:YAMLYankKey` | **TODO** Yanks the full path of the key for the current key/value pair |
-| `:YAMLYankValue` | **TODO** Yanks the value of the current key/value pair |
+| `:YAMLYank` | Yanks the full path and value of the current key/value pair |
+| `:YAMLYankKey` | Yanks the full path of the key for the current key/value pair |
+| `:YAMLYankValue` | Yanks the value of the current key/value pair |
 | `:Telescope yaml` | **TODO** Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
+
+By now, it only uses to unamed register to yank (**TODO** allow users to choose
+which register to yank to).
 
 ## Example
 
@@ -59,55 +62,9 @@ use {
   requires = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-telescope/telescope.nvim" -- optional
-  }
-}
-```
-
-### Opinionated
-
-In my setup I create keymaps when I load the plugin. In this example,
-`<Leader>yv` to view the value, `<Leader>YY` to yank it, `<Leader>yy` to yank
-just the path, and `<Leader>y` to trigger Telescope:
-
-```lua
-use {
-  "cuducos/yaml.nvim",
-  requires = {
-    "nvim-treesitter/nvim-treesitter",
-    "nvim-telescope/telescope.nvim"
   },
-  ft = {"yaml"},
-  config = function()
-      vim.api.nvim_set_keymap(
-        "n",
-        "<Leader>yv",
-        "<Cmd>lua require("yaml_nvim").view()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<Leader>yp",
-        "<Cmd>lua require("yaml_nvim").yank_pair()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<Leader>yk",
-        "<Cmd>lua require("yaml_nvim").yank_key()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<Leader>yv",
-        "<Cmd>lua require("yaml_nvim").yank_value()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<Leader>y",
-        "<Cmd>Telescope yaml<CR>",
-        { noremap = true, silent = true }
-      )
-  end
+  config = function ()
+    require("yaml_nvim").init()
+  end,
 }
 ```

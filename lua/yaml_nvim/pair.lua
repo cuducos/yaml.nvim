@@ -56,11 +56,13 @@ M.parse = function(node)
   local value = get_value(node, bufnr)
   local line, column = node:start()
   local path = vim.api.nvim_buf_get_name(bufnr)
-  local human = string.format("%s = %s", key, clean_up_block_value(value))
+  local cleaned_value = clean_up_block_value(value)
+  local human = string.format("%s = %s", key, cleaned_value)
 
   return {
     key = key,
     value = value,
+    cleaned_value = cleaned_value,
     human = human,
     line = line + 1,
     column = column,
