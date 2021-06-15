@@ -4,14 +4,13 @@ Simple tools to help developers working YAML in [Neovim](https://neovim.io):
 
 | Command | Description |
 |:--|:--|
-| `:YAMLView` | Shows the full path and value of the current key/value pair (**TODO** support array indexes) |
+| `:YAMLView` | Shows the full path and value of the current key/value pair ([**TODO** support array indexes](https://github.com/cuducos/yaml.nvim/issues/1)) |
 | `:YAMLYank` | Yanks the full path and value of the current key/value pair |
 | `:YAMLYankKey` | Yanks the full path of the key for the current key/value pair |
 | `:YAMLYankValue` | Yanks the value of the current key/value pair |
-| `:Telescope yaml` | **TODO** Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
+| `:Telescope yaml` | [**TODO** Full path key/value fuzzy finder](https://github.com/cuducos/yaml.nvim/issues/5) via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
 
-By now, it only uses to unamed register to yank (**TODO** allow users to choose
-which register to yank to).
+By now, it only uses to unamed register to yank ([**TODO** allow users to choose which register to yank to](https://github.com/cuducos/yaml.nvim/issues/6)).
 
 ## Example
 
