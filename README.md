@@ -47,11 +47,7 @@ respectively.
 
 ## Install
 
-It requires:
-  * [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
-  * [YAML support](https://github.com/ikatyang/tree-sitter-yaml) active in
-    `nvim-treesitter`
-  * **Optionally**, Telescope
+It requires [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) with [YAML support](https://github.com/ikatyang/tree-sitter-yaml). Telescope is **optional**.
 
 With [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
