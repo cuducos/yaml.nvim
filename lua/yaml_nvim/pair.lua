@@ -35,12 +35,44 @@ local function get_value(node, bufnr)
   end
 end
 
+local function is_sequence_block(value)
+  if value:type() ~= "block_node" then
+    return false
+  end
+
+  for block_sequence, _ in value:iter_children() do
+    return block_sequence:type() == "block_sequence"
+  end
+end
+
+local function get_sequence_index(block, key)
+  for block_sequence, _ in block:iter_children() do
+    local index = 0
+    for block_sequence_item, _ in block_sequence:iter_children() do
+      if ts_utils.is_parent(block_sequence_item, key) then
+        return index
+      end
+      index = index + 1
+    end
+  end
+end
+
 local function get_keys(node, bufnr)
   local keys = {}
+  local original = node
 
   while node ~= nil do
     if node:type() == "block_mapping_pair" then
-      table.insert(keys, ts_utils.get_node_text(node:field("key")[1], bufnr)[1])
+      local key = node:field("key")[1]
+      local key_as_string = ts_utils.get_node_text(key, bufnr)[1]
+
+      local value = node:field("value")[1]
+      if is_sequence_block(value) then
+        local index = get_sequence_index(value, original)
+        key_as_string = key_as_string .. "[" .. index .. "]"
+      end
+
+      table.insert(keys, key_as_string)
     end
 
     node = node:parent()
