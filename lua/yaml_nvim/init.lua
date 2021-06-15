@@ -3,7 +3,13 @@ local pair = require("yaml_nvim.pair")
 local M = {}
 
 M.view = function()
-  print(pair.parse(document.get_key_relevant_to_cursor()).as_string)
+  local node = document.get_key_relevant_to_cursor()
+  if node == nil then
+    return
+  end
+
+  local parsed = pair.parse(node)
+  print(parsed.human)
 end
 
 M.init = function()
