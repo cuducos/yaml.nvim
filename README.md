@@ -59,6 +59,7 @@ With [packer.nvim](https://github.com/wbthomason/packer.nvim):
 ```lua
 use {
   "cuducos/yaml.nvim",
+  ft = {"yaml"}, -- optional
   requires = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-telescope/telescope.nvim" -- optional
