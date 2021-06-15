@@ -17,7 +17,20 @@ local function get_keys(root)
   return keys
 end
 
-local function all_keys()
+M.is_value_a_block = function(key)
+  for node, name in key:parent():iter_children() do
+    if name == "value" then
+      if node:type() ~= "block_node" then
+        return false
+      else
+        return node:child():type() ~= "block_scalar"
+      end
+    end
+  end
+  return true
+end
+
+M.all_keys = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
   local tree = vim.treesitter.get_parser(bufnr, ft):parse()[1]
@@ -29,7 +42,7 @@ M.get_key_relevant_to_cursor = function()
   local cursor_line = vim.api.nvim_win_get_cursor(0)[1]
   local previous_node = nil
 
-  for _, node in pairs(all_keys()) do
+  for _, node in pairs(M.all_keys()) do
     local node_line, _ = node:start()
     node_line = node_line + 1
 
