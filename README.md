@@ -1,13 +1,14 @@
 # yaml.nvim (work in progress)
 
-Simple tools to help developers working YAML in [Neovim](https://neovim.io). It
-offers basic functionalities. According to the line where the cursor is:
+Simple tools to help developers working YAML in [Neovim](https://neovim.io):
 
-1. Shows the full path and value of the current key/value pair.
-    * **TODO** Support array indexes
-1. **TODO**Yanks the full path and value of the current key/value pair.
-1. **TODO** Yanks the full path of the key for the current key/value pair.
-1. **TODO** Integrates with [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+| Command | Description |
+|:--|:--|
+| `:YAMLView` | Shows the full path and value of the current key/value pair (**TODO** support array indexes) |
+| `:YAMLYank` | **TODO** Yanks the full path and value of the current key/value pair |
+| `:YAMLYankKey` | **TODO** Yanks the full path of the key for the current key/value pair |
+| `:YAMLYankValue` | **TODO** Yanks the value of the current key/value pair |
+| `:Telescope yaml` | **TODO** Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
 
 ## Example
 
@@ -48,7 +49,7 @@ It requires:
   * [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
   * [YAML support](https://github.com/ikatyang/tree-sitter-yaml) active in
     `nvim-treesitter`
-  * **Optionally** Telescope
+  * **Optionally**, Telescope
 
 With [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
@@ -62,14 +63,9 @@ use {
 }
 ```
 
-## Usage
+### Opinionated
 
-The plugin adds some commands, but **no** keymaps (that's on you): `:YAMLView`,
-`:YAMLYank`, `:YAMLYank!` and `:YAMLTelescope`.
-
-### Opinionated example
-
-In my setup I create keymaps when I load the plugin. In this example, 
+In my setup I create keymaps when I load the plugin. In this example,
 `<Leader>yv` to view the value, `<Leader>YY` to yank it, `<Leader>yy` to yank
 just the path, and `<Leader>y` to trigger Telescope:
 
@@ -90,20 +86,26 @@ use {
       )
       vim.api.nvim_set_keymap(
         "n",
-        "<Leader>YY",
-        "<Cmd>lua require("yaml_nvim").yank_path()<CR>",
+        "<Leader>yp",
+        "<Cmd>lua require("yaml_nvim").yank_pair()<CR>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
-        "<Leader>yy",
-        "<Cmd>lua require("yaml_nvim").yank()<CR>",
+        "<Leader>yk",
+        "<Cmd>lua require("yaml_nvim").yank_key()<CR>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<Leader>yv",
+        "<Cmd>lua require("yaml_nvim").yank_value()<CR>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<Leader>y",
-        "<Cmd>lua require("yaml_nvim").telescope()<CR>",
+        "<Cmd>Telescope yaml<CR>",
         { noremap = true, silent = true }
       )
   end
