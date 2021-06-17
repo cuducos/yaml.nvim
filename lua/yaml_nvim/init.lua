@@ -1,6 +1,20 @@
+local has_telescope, _ = pcall(require, "telescope")
 local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
 local M = {}
+
+-- created in _G so we can call it with v:lua
+_G.create_yaml_quickfix = function()
+  local lines = {}
+  for _, key in pairs(document.all_keys()) do
+    if not document.is_value_a_block(key) then
+      local parsed = pair.parse(key)
+      table.insert(lines, parsed.errorformat)
+    end
+  end
+
+  return lines
+end
 
 M.view = function()
   local node = document.get_key_relevant_to_cursor()
@@ -32,27 +46,28 @@ M.yank = function(register, key, value)
     contents = parsed.cleaned_value
   end
 
-  vim.cmd(
-    string.format(
-      "call setreg('%s', '%s')", register, string.gsub(contents, "\'", "\\\'")
-    )
-  )
+  contents = string.gsub(contents, "\'", "\\\'")
+  vim.cmd(string.format("call setreg('%s', '%s')", register, contents))
 end
 
-M.init = function()
-  local has_telescope, telescope = pcall(require, "telescope")
-  if has_telescope then
-    telescope.load_extension("yaml")
+M.telescope = function()
+  if not has_telescope then
+    return
   end
+  vim.cmd("cex v:lua.create_yaml_quickfix()")
+  require("telescope.builtin").quickfix()
+end
 
-  vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
-  vim.cmd("command! YAMLYank lua require('yaml_nvim').yank('\"', true, true)")
-  vim.cmd(
-    "command! YAMLYankKey lua require('yaml_nvim').yank('\"', true, false)"
-  )
-  vim.cmd(
-    "command! YAMLYankValue lua require('yaml_nvim').yank('\"', false, true)"
-  )
+vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
+vim.cmd("command! YAMLYank lua require('yaml_nvim').yank('\"', true, true)")
+vim.cmd("command! YAMLYankKey lua require('yaml_nvim').yank('\"', true, false)")
+vim.cmd(
+  "command! YAMLYankValue lua require('yaml_nvim').yank('\"', false, true)"
+)
+vim.cmd("command! YAMLQuickfix cex v:lua.create_yaml_quickfix()")
+
+if has_telescope then
+  vim.cmd("command! YAMLTelescope lua require('yaml_nvim').telescope()")
 end
 
 return M
