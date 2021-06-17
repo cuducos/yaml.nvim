@@ -31,3 +31,17 @@ YAML loaded in the current buffer.
 
     Yanks the value of the key/value pair under the cursor to the unnamed
     register (see |:quotequote|).
+
+:YAMLQuickfix                                                   *YAMLQuickfix*
+
+    Creates a |:quickfix| list with the contents of the YAML, showing the full
+    path and value of the key/value pairs of the current YAML file. It
+    collects all nested keys and outputs them as a dot-case string (e.g.:
+    `root.parent.child.key = value`). It uses Vim's native |:cex| function, so
+    the cursor is positioned in the first selection of the |:quickfix|.
+
+:YAMLTelescope                                                 *YAMLTelescope*
+
+    Creates a |:quickfix| list as in |:YAMLQuickfix|, and loads it with
+    |:telescope.nvim| using |:telescope.builtin|'s `quickfix()` function. Only
+    available if |:telescope.nvim| is installed.
