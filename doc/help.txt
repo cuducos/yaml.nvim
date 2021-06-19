@@ -14,23 +14,28 @@ YAML loaded in the current buffer.
     `root.parent.child.key = value`). It uses Lua's `print` function to output
     the value to the user.
 
-:YAMLYank                                                          *:YAMLYank*
+:YAMLYank [register]                                               *:YAMLYank*
 
     Yanks the full path and value of the key/value pair under the cursor to
-    the unnamed register (see |:quotequote|). It collects all nested keys and
-    outputs them as a dot-case string (e.g.: `root.parent.child.key =
-    value`).
+    the selected register. The default register is the unnamed one (see
+    |:quotequote|).
 
-:YAMLYankKey                                                    *:YAMLYankKey*
+    It collects all nested keys and outputs them as a dot-case string (e.g.:
+    `root.parent.child.key = value`).
+
+:YAMLYankKey [register]                                         *:YAMLYankKey*
 
     Yanks the full path of the key of the key/value pair under the cursor to
-    the unnamed register (see |:quotequote|). It collects all nested keys and
-    outputs them as a dot-case string (e.g.: `root.parent.child.key`).
+    the selected register. The default register is the unnamed one (see
+    |:quotequote|).
 
-:YAMLYankValue                                                *:YAMLYankValue*
+    It collects all nested keys and outputs them as a dot-case string (e.g.:
+    `root.parent.child.key`).
 
-    Yanks the value of the key/value pair under the cursor to the unnamed
-    register (see |:quotequote|).
+:YAMLYankValue [register]                                     *:YAMLYankValue*
+
+    Yanks the value of the key/value pair under the cursor to the selected
+    register. The default register is the unnamed one (see |:quotequote|).
 
 :YAMLQuickfix                                                   *YAMLQuickfix*
 

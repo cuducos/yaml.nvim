@@ -16,17 +16,8 @@ _G.create_yaml_quickfix = function()
   return lines
 end
 
-M.view = function()
-  local node = document.get_key_relevant_to_cursor()
-  if node == nil then
-    return
-  end
-
-  local parsed = pair.parse(node)
-  print(parsed.human)
-end
-
-M.yank = function(register, key, value)
+local yank = function(key, value, register)
+  register = register or [["]]
   if not key and not value then
     return
   end
@@ -50,6 +41,28 @@ M.yank = function(register, key, value)
   vim.cmd(string.format("call setreg('%s', '%s')", register, contents))
 end
 
+M.view = function()
+  local node = document.get_key_relevant_to_cursor()
+  if node == nil then
+    return
+  end
+
+  local parsed = pair.parse(node)
+  print(parsed.human)
+end
+
+M.yank_all = function(register)
+  yank(true, true, register)
+end
+
+M.yank_key = function(register)
+  yank(true, false, register)
+end
+
+M.yank_value = function(register)
+  yank(false, true, register)
+end
+
 M.telescope = function()
   if not has_telescope then
     return
@@ -59,10 +72,14 @@ M.telescope = function()
 end
 
 vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
-vim.cmd("command! YAMLYank lua require('yaml_nvim').yank('\"', true, true)")
-vim.cmd("command! YAMLYankKey lua require('yaml_nvim').yank('\"', true, false)")
 vim.cmd(
-  "command! YAMLYankValue lua require('yaml_nvim').yank('\"', false, true)"
+  "command! -nargs=? YAMLYank lua require('yaml_nvim').yank_all(<f-args>)"
+)
+vim.cmd(
+  "command! -nargs=? YAMLYankKey lua require('yaml_nvim').yank_key(<f-args>)"
+)
+vim.cmd(
+  "command! -nargs=? YAMLYankValue lua require('yaml_nvim').yank_value(<f-args>)"
 )
 vim.cmd("command! YAMLQuickfix cex v:lua.create_yaml_quickfix()")
 
