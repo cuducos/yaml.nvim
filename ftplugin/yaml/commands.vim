@@ -1,1 +1,1 @@
-lua require("yaml_nvim").init()
+lua require("yaml_nvim")
