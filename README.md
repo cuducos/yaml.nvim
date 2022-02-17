@@ -8,7 +8,7 @@ Simple tools to help developers working YAML in [Neovim](https://neovim.io):
 | `:YAMLYank [register]` | Yanks the full path and value of the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLYankKey [register]` | Yanks the full path of the key for the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLYankValue [regster]` | Yanks the value of the current key/value pair. The default register is the unnamed one (`"`) |
-| `:YAMLQuickfix` | Generates a quickfix with key/balue pairs |
+| `:YAMLQuickfix` | Generates a quickfix with key/value pairs |
 | `:YAMLTelescope` | Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
 
 ![Example GIF](doc/demo.gif)
