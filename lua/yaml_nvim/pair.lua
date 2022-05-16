@@ -28,7 +28,7 @@ local function get_value(node, bufnr)
   while node ~= nil do
     if node:type() == "block_mapping_pair" then
       local value = node:field("value")[1]
-      return table.concat(ts_utils.get_node_text(value, bufnr), "\n")
+      return table.concat({vim.treesitter.query.get_node_text(value, bufnr)}, "\n")
     end
 
     node = node:parent()
@@ -64,7 +64,7 @@ local function get_keys(node, bufnr)
   while node ~= nil do
     if node:type() == "block_mapping_pair" then
       local key = node:field("key")[1]
-      local key_as_string = ts_utils.get_node_text(key, bufnr)[1]
+      local key_as_string = vim.treesitter.query.get_node_text(key, bufnr)
 
       local value = node:field("value")[1]
       if is_sequence_block(value) then
