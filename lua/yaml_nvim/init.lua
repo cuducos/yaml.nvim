@@ -48,7 +48,7 @@ M.view = function()
   end
 
   local parsed = pair.parse(node)
-  print(parsed.human)
+  vim.notify(parsed.human)
 end
 
 M.yank_all = function(register)

@@ -11,8 +11,8 @@ YAML loaded in the current buffer.
 
     Shows the full path and value of the key/value pair under the cursor. It
     collects all nested keys and outputs them as a dot-case string (e.g.:
-    `root.parent.child.key = value`). It uses Lua's `print` function to output
-    the value to the user.
+    `root.parent.child.key = value`). It uses Lua's `vim.notify` function to
+    show the value to the user.
 
 :YAMLYank [register]                                               *:YAMLYank*
 
