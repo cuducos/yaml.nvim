@@ -27,6 +27,9 @@ use {
     "nvim-treesitter/nvim-treesitter",
     "nvim-telescope/telescope.nvim" -- optional
   },
+  config = function ()
+    require("config.yaml")
+  end,
 }
 ```
 
