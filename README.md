@@ -1,4 +1,4 @@
-# yaml.nvim
+# yaml.nvim [![Tests status](https://github.com/cuducos/yaml.nvim/actions/workflows/tests.yml/badge.svg)](https://github.com/cuducos/yaml.nvim/actions/workflows/tests.yml)
 
 Simple tools to help developers working YAML in [Neovim](https://neovim.io):
 
