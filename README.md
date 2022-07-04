@@ -32,11 +32,7 @@ use {
 
 Install with [vim-plug](https://github.com/junegunn/vim-plug):
 ```viml
-" optional
-Plug 'nvim-telescope/telescope.nvim'
-
-" required
+Plug 'nvim-telescope/telescope.nvim' " optional
 Plug 'nvim-treesitter/nvim-treesitter'
-
 Plug 'cuducos/yaml.nvim'
 ```
