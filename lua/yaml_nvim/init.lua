@@ -3,17 +3,38 @@ local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
 local M = {}
 
--- created in _G so we can call it with v:lua
-_G.create_yaml_quickfix = function()
-	local lines = {}
-	for _, key in pairs(document.all_keys()) do
-		if not document.is_value_a_block(key) then
-			local parsed = pair.parse(key)
-			table.insert(lines, parsed.errorformat)
-		end
+local assure_yaml_filetype = function(func, ...)
+	local expected = "yaml"
+	local restore_to = nil
+
+	if vim.bo.filetype ~= expected then
+		restore_to = vim.bo.filetype
+		vim.bo.filetype = expected
 	end
 
-	return lines
+	if arg == nil then
+		func()
+	else
+		func(unpack(arg))
+	end
+
+	if restore_to ~= nil then
+		vim.bo.filetype = restore_to
+	end
+end
+
+-- created in _G so we can call it with v:lua
+_G.create_yaml_quickfix = function()
+	assure_yaml_filetype(function()
+		local lines = {}
+		for _, key in pairs(document.all_keys()) do
+			if not document.is_value_a_block(key) then
+				local parsed = pair.parse(key)
+				table.insert(lines, parsed.errorformat)
+			end
+		end
+		return lines
+	end)
 end
 
 local yank = function(key, value, register)
@@ -42,25 +63,27 @@ local yank = function(key, value, register)
 end
 
 M.view = function()
-	local node = document.get_key_relevant_to_cursor()
-	if node == nil then
-		return
-	end
+	assure_yaml_filetype(function()
+		local node = document.get_key_relevant_to_cursor()
+		if node == nil then
+			return
+		end
 
-	local parsed = pair.parse(node)
-	vim.notify(parsed.human)
+		local parsed = pair.parse(node)
+		vim.notify(parsed.human)
+	end)
 end
 
 M.yank_all = function(register)
-	yank(true, true, register)
+	assure_yaml_filetype(yank, true, true, register)
 end
 
 M.yank_key = function(register)
-	yank(true, false, register)
+	assure_yaml_filetype(yank, true, false, register)
 end
 
 M.yank_value = function(register)
-	yank(false, true, register)
+	assure_yaml_filetype(yank, false, true, register)
 end
 
 M.telescope = function()
