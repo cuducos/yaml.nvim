@@ -3,7 +3,7 @@ local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
 local M = {}
 
-local assure_yaml_filetype = function(func, ...)
+local set_yaml_as_filetype = function()
 	local expected = "yaml"
 	local restore_to = nil
 
@@ -12,29 +12,41 @@ local assure_yaml_filetype = function(func, ...)
 		vim.bo.filetype = expected
 	end
 
+	return restore_to
+end
+
+local restore_filetype = function(restore_to)
+	if restore_to ~= nil then
+		vim.bo.filetype = restore_to
+	end
+end
+
+local assure_yaml_filetype = function(func, ...)
+	local restore_to = set_yaml_as_filetype()
+
 	if arg == nil then
 		func()
 	else
 		func(unpack(arg))
 	end
 
-	if restore_to ~= nil then
-		vim.bo.filetype = restore_to
-	end
+	restore_filetype(restore_to)
 end
 
 -- created in _G so we can call it with v:lua
 _G.create_yaml_quickfix = function()
-	assure_yaml_filetype(function()
-		local lines = {}
-		for _, key in pairs(document.all_keys()) do
-			if not document.is_value_a_block(key) then
-				local parsed = pair.parse(key)
-				table.insert(lines, parsed.errorformat)
-			end
+	local restore_to = set_yaml_as_filetype()
+	local lines = {}
+
+	for _, key in pairs(document.all_keys()) do
+		if not document.is_value_a_block(key) then
+			local parsed = pair.parse(key)
+			table.insert(lines, parsed.errorformat)
 		end
-		return lines
-	end)
+	end
+
+	restore_filetype(restore_to)
+	return lines
 end
 
 local yank = function(key, value, register)
