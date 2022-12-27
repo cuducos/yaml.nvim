@@ -69,7 +69,9 @@ local function get_keys(node, bufnr)
 			local value = node:field("value")[1]
 			if is_sequence_block(value) then
 				local index = get_sequence_index(value, original)
-				key_as_string = key_as_string .. "[" .. index .. "]"
+				if index ~= nil then
+					key_as_string = key_as_string .. "[" .. index .. "]"
+				end
 			end
 
 			table.insert(keys, key_as_string)
