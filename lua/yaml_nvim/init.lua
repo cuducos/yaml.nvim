@@ -66,7 +66,7 @@ local yank = function(key, value, register)
 		contents = parsed.cleaned_value
 	end
 
-	contents = string.gsub(contents, "'", "\\'")
+	contents = string.gsub(contents, "'", "''")
 	vim.cmd(string.format("call setreg('%s', '%s')", register, contents))
 end
 
