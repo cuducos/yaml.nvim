@@ -1,36 +1,35 @@
 local load_cmds = function()
-    local cmds = {}
-    for _, cmd in pairs(vim.api.nvim_get_commands({})) do
-        table.insert(cmds, cmd.name)
-    end
-    return cmds
+	local cmds = {}
+	for _, cmd in pairs(vim.api.nvim_get_commands({})) do
+		table.insert(cmds, cmd.name)
+	end
+	return cmds
 end
 
 local contains = function(tbl, item)
-    for _, value in pairs(tbl) do
-        if value == item then
-            return true
-        end
-    end
-    return false
+	for _, value in pairs(tbl) do
+		if value == item then
+			return true
+		end
+	end
+	return false
 end
 
 describe("setup", function()
+	it("makes commands available", function()
+		require("yaml_nvim")
 
-    it("makes commands available", function()
-        require("yaml_nvim")
+		local expected = {
+			"YAMLView",
+			"YAMLYank",
+			"YAMLYankKey",
+			"YAMLYankValue",
+			"YAMLQuickfix",
+		}
 
-        local expected = {
-            "YAMLView",
-            "YAMLYank",
-            "YAMLYankKey",
-            "YAMLYankValue",
-            "YAMLQuickfix",
-        }
-
-        local cmds = load_cmds()
-        for _, cmd in pairs(expected) do
-            assert(contains(cmds, cmd), cmd .. " not found")
-        end
-    end)
+		local cmds = load_cmds()
+		for _, cmd in pairs(expected) do
+			assert(contains(cmds, cmd), cmd .. " not found")
+		end
+	end)
 end)

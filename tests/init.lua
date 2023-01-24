@@ -1,9 +1,9 @@
 local install = function(repo, dir)
-    local is_not_a_directory = vim.fn.isdirectory(dir) == 0
-    if is_not_a_directory then
-        print(vim.fn.system({ "git", "clone", repo, dir }))
-    end
-    vim.opt.rtp:append(dir)
+	local is_not_a_directory = vim.fn.isdirectory(dir) == 0
+	if is_not_a_directory then
+		print(vim.fn.system({ "git", "clone", repo, dir }))
+	end
+	vim.opt.rtp:append(dir)
 end
 
 local plenary_dir = os.getenv("PLENARY_DIR") or "/tmp/plenary.nvim"
