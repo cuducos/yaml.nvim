@@ -24,11 +24,7 @@ end
 local assure_yaml_filetype = function(func, ...)
 	local restore_to = set_yaml_as_filetype()
 
-	if arg == nil then
-		func()
-	else
-		func(unpack(arg))
-	end
+	func(...)
 
 	restore_filetype(restore_to)
 end
@@ -70,7 +66,7 @@ local yank = function(key, value, register)
 		contents = parsed.cleaned_value
 	end
 
-	contents = string.gsub(contents, "'", "\\'")
+	contents = string.gsub(contents, "'", "''")
 	vim.cmd(string.format("call setreg('%s', '%s')", register, contents))
 end
 
