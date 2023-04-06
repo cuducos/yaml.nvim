@@ -1,5 +1,4 @@
 local ts_utils = require("nvim-treesitter.ts_utils")
-local document = require("yaml_nvim.document")
 local M = {}
 
 local function trim(value)
@@ -28,7 +27,7 @@ local function get_value(node, bufnr)
 	while node ~= nil do
 		if node:type() == "block_mapping_pair" then
 			local value = node:field("value")[1]
-			return table.concat({ vim.treesitter.query.get_node_text(value, bufnr) }, "\n")
+			return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
 		end
 
 		node = node:parent()
@@ -64,7 +63,7 @@ local function get_keys(node, bufnr)
 	while node ~= nil do
 		if node:type() == "block_mapping_pair" then
 			local key = node:field("key")[1]
-			local key_as_string = vim.treesitter.query.get_node_text(key, bufnr)
+			local key_as_string = vim.treesitter.get_node_text(key, bufnr)
 
 			local value = node:field("value")[1]
 			if is_sequence_block(value) then

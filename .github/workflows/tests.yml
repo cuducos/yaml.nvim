@@ -11,13 +11,11 @@ jobs:
         nvim-versions: ["stable", "nightly"]
     name: Tests
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
       - uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
           version: ${{ matrix.nvim-versions }}
-
-      - name: run tests
-        run: nvim --headless --noplugin -u tests/init.lua -c "PlenaryBustedDirectory tests/yaml_nvim { minimal_init = 'tests/init.lua' }"
+      - uses: actions/setup-node@v3
+      - run: npm install -g tree-sitter-cli
+      - uses: actions/checkout@v3
+      - run: nvim --headless -u tests/init.lua -c "PlenaryBustedDirectory tests/yaml_nvim { minimal_init = 'tests/init.lua' }"

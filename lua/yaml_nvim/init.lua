@@ -69,7 +69,7 @@ local yank = function(key, value, register)
 	contents = string.gsub(contents, "'", "''")
 	contents = string.gsub(contents, "\n", ", ")
 	contents = string.gsub(contents, "\r", "")
-	vim.cmd(string.format("call setreg('%s', '%s')", register, contents))
+	vim.fn.setreg(register, contents)
 end
 
 M.view = function()
