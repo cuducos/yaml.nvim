@@ -1,22 +1,8 @@
 ---
 on: [push, pull_request]
-name: main
+name: Tests
 
 jobs:
-
-  stylua:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        nvim-versions: ["stable", "nightly"]
-    name: Stylua
-    steps:
-      - uses: actions/checkout@v3
-      - uses: JohnnyMorganz/stylua-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: latest
-          args: --check .
 
   tests:
     runs-on: ubuntu-latest
