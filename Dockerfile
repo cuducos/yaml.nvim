@@ -33,4 +33,4 @@ RUN mkdir -p .config/nvim/
 ADD tests/init.lua .config/nvim/init.lua
 ADD . .
 
-CMD ["nvim", "--headless", "-c", "PlenaryBustedDirectory tests/yaml_nvim { minimal_init = 'tests/init.lua' }"]
+CMD ["nvim", "tests/sample.yaml"]
