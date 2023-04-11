@@ -9,5 +9,13 @@ worldcup:
   semifinals:
     - brazil: 1
       germany: 7
+      details:
+        - {
+            stadium: Mineirão
+          }
     - nederland: 0
       argentina: 0
+      details:
+        - {
+             stadium: Itaquerão
+          }
