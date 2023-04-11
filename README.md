@@ -24,7 +24,9 @@ It requires **Neovim 0.9** or newer, [`nvim-treesitter`](https://github.com/nvim
 
  </details>
 
-Install with [packer.nvim](https://github.com/wbthomason/packer.nvim):
+## Install
+
+### With [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
 
 ```lua
 use {
@@ -37,7 +39,8 @@ use {
 }
 ```
 
-Install with [vim-plug](https://github.com/junegunn/vim-plug):
+### With [`vim-plug`](https://github.com/junegunn/vim-plug):
+
 ```viml
 Plug 'nvim-telescope/telescope.nvim' " optional
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -46,7 +49,10 @@ Plug 'cuducos/yaml.nvim'
 
 ## Reporting bugs and contributing
 
-There is a mini toolchain to help you test the plugin in isolation using a container. It requires [Lua](https://www.lua.org/), plus [Docker](https://www.docker.com/) **or** [Podman](https://podman.io/):
+There is a mini toolchain to help you test the plugin in isolation using a container. It requires:
+
+* [Lua](https://www.lua.org/)
+* [Docker](https://www.docker.com/) or [Podman](https://podman.io/)
 
 | Command | Description |
 |---|---|
