@@ -89,8 +89,7 @@ M.parse = function(node)
 	local bufnr = vim.api.nvim_get_current_buf()
 	local key = get_keys(node, bufnr)
 	local value = get_value(node, bufnr)
-	local line, _ = node:start()
-	local path = vim.api.nvim_buf_get_name(bufnr)
+	local line, col = node:start()
 	local cleaned_value = clean_up_block_value(value)
 	local human = string.format("%s = %s", key, cleaned_value)
 
@@ -98,7 +97,13 @@ M.parse = function(node)
 		key = key,
 		cleaned_value = cleaned_value,
 		human = human,
-		errorformat = string.format("%s:%d: %s", path, line + 1, human),
+		quickfix = {
+			bufnr = bufnr,
+			col = col,
+			lnum = line,
+			text = human,
+			valid = 1,
+		},
 	}
 end
 
