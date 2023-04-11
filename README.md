@@ -15,9 +15,14 @@ Simple tools to help developers working YAML in [Neovim](https://neovim.io):
 
 It requires **Neovim 0.9** or newer, [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) with [YAML support](https://github.com/ikatyang/tree-sitter-yaml). Telescope is **optional**.
 
-For **Neovim 0.7 or 0.8**, pin to [`7925bd2`](https://github.com/cuducos/yaml.nvim/commit/7925bd2bf03c718996ccad7e1a49eafe40cd3246).
+<details>
 
-For **Neovim 0.5 or 0.6**, pin to [`155c23d`](https://github.com/cuducos/yaml.nvim/commit/155c23de8f99fdb424f8aa713bcb993cc2538c6c).
+<summary>What about older versions of Neovim?</summary>
+
+* For **Neovim 0.7 or 0.8**, pin to [`7925bd2`](https://github.com/cuducos/yaml.nvim/commit/7925bd2bf03c718996ccad7e1a49eafe40cd3246)
+* For **Neovim 0.5 or 0.6**, pin to [`155c23d`](https://github.com/cuducos/yaml.nvim/commit/155c23de8f99fdb424f8aa713bcb993cc2538c6c)
+
+ </details>
 
 Install with [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
