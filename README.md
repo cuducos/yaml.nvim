@@ -33,6 +33,19 @@ Telescope is **optional**.
 
 ## Install
 
+### With [`lazy.nvim`](https://github.com/folke/lazy.nvim)
+
+```lua
+{
+  "cuducos/yaml.nvim",
+  ft = { "yaml" }, -- optional
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-telescope/telescope.nvim", -- optional
+  },
+}
+```
+
 ### With [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
 
 ```lua
