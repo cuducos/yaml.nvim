@@ -75,7 +75,7 @@ Plug 'cuducos/yaml.nvim'
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "yaml" },
 	callback = function()
-		vim.opt_local.winbar = [[%{%v:lua.require("yaml_nvim").get()%}]]
+		vim.opt_local.winbar = [[%{%v:lua.require("yaml_nvim").get_yaml_key_and_value()%}]]
 	end,
 })
 ```

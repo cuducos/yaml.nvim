@@ -58,10 +58,10 @@ local yank = function(key, value, register)
 end
 
 M.view = function()
-	vim.notify(M.get())
+	vim.notify(M.get_yaml_key_and_value())
 end
 
-M.get = function()
+M.get_yaml_key_and_value = function()
 	local out = assure_yaml_filetype(function()
 		local node = document.get_key_relevant_to_cursor()
 		if node == nil then
