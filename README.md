@@ -69,7 +69,9 @@ Plug 'cuducos/yaml.nvim'
 
 ## Configuration
 
-### Showing the YAML patch and value in Neovim's winbar
+### Showing the YAML path and value
+
+#### Neovim's winbar
 
 ```lua
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -78,6 +80,18 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.opt_local.winbar = [[%{%v:lua.require("yaml_nvim").get_yaml_key_and_value()%}]]
 	end,
 })
+```
+
+#### Neovim's statusline (with [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim))
+
+```lua
+require("lualine").setup({
+	sections = {
+		lualine_x = { require("yaml_nvim").get_yaml_key_and_value },
+		-- etc
+    }
+})
+
 ```
 
 ## Reporting bugs and contributing
