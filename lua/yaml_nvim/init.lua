@@ -21,33 +21,37 @@ local restore_filetype = function(restore_to)
 	end
 end
 
-local assure_yaml_filetype = function(func, ...)
+local get_current_yaml_node = function()
 	local restore_to = set_yaml_as_filetype()
-
-	func(...)
-
-	restore_filetype(restore_to)
-end
-
-local yank = function(key, value, register)
-	register = register or [["]]
-	if not key and not value then
-		return
-	end
 
 	local node = document.get_key_relevant_to_cursor()
 	if node == nil then
 		return
 	end
-
 	local parsed = pair.parse(node)
+
+	restore_filetype(restore_to)
+
+	return parsed
+end
+
+local yank = function(node, key, value, register)
+	if node == nil then
+		return
+	end
+
+	register = register or [["]]
+	if not key and not value then
+		return
+	end
+
 	local contents = ""
 	if key and value then
-		contents = parsed.human
+		contents = node.human
 	elseif key then
-		contents = parsed.key
+		contents = node.key
 	elseif value then
-		contents = parsed.cleaned_value
+		contents = node.cleaned_value
 	end
 
 	contents = string.gsub(contents, "'", "''")
@@ -57,30 +61,33 @@ local yank = function(key, value, register)
 end
 
 M.view = function()
-	vim.notify(M.get_yaml_key_and_value())
-end
-
-M.get_yaml_key_and_value = function()
-	local restore_to = set_yaml_as_filetype()
-	local node = document.get_key_relevant_to_cursor()
+	local node = get_current_yaml_node()
 	if node == nil then
 		return
 	end
-	local parsed = pair.parse(node)
-	restore_filetype(restore_to)
-	return parsed.human
+
+	vim.notify(node.human)
+end
+
+M.get_yaml_key_and_value = function()
+	local node = get_current_yaml_node()
+	if node == nil then
+		return
+	end
+
+	return node.human
 end
 
 M.yank = function(register)
-	assure_yaml_filetype(yank, true, true, register)
+	yank(get_current_yaml_node(), true, true, register)
 end
 
 M.yank_key = function(register)
-	assure_yaml_filetype(yank, true, false, register)
+	yank(get_current_yaml_node(), true, false, register)
 end
 
 M.yank_value = function(register)
-	assure_yaml_filetype(yank, false, true, register)
+	yank(get_current_yaml_node(), false, true, register)
 end
 
 M.quickfix = function()
