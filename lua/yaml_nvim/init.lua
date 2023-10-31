@@ -24,10 +24,9 @@ end
 local assure_yaml_filetype = function(func, ...)
 	local restore_to = set_yaml_as_filetype()
 
-	local out = func(...)
+	func(...)
 
 	restore_filetype(restore_to)
-	return out
 end
 
 local yank = function(key, value, register)
@@ -62,16 +61,14 @@ M.view = function()
 end
 
 M.get_yaml_key_and_value = function()
-	local out = assure_yaml_filetype(function()
-		local node = document.get_key_relevant_to_cursor()
-		if node == nil then
-			return
-		end
-
-		local parsed = pair.parse(node)
-		return parsed.human
-	end)
-	return out
+	local restore_to = set_yaml_as_filetype()
+	local node = document.get_key_relevant_to_cursor()
+	if node == nil then
+		return
+	end
+	local parsed = pair.parse(node)
+	restore_filetype(restore_to)
+	return parsed.human
 end
 
 M.yank = function(register)
