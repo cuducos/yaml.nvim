@@ -67,6 +67,19 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'cuducos/yaml.nvim'
 ```
 
+## Configuration
+
+### Showing the YAML patch and value in Neovim's winbar
+
+```lua
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "yaml" },
+	callback = function()
+		vim.opt_local.winbar = [[%{%v:lua.require("yaml_nvim").get_yaml_key_and_value()%}]]
+	end,
+})
+```
+
 ## Reporting bugs and contributing
 
 There is a mini toolchain to help you test the plugin in isolation using a container. It requires:

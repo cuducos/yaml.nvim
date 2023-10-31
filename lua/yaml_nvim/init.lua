@@ -57,15 +57,18 @@ local yank = function(key, value, register)
 end
 
 M.view = function()
-	assure_yaml_filetype(function()
-		local node = document.get_key_relevant_to_cursor()
-		if node == nil then
-			return
-		end
+	vim.notify(M.get_yaml_key_and_value())
+end
 
-		local parsed = pair.parse(node)
-		vim.notify(parsed.human)
-	end)
+M.get_yaml_key_and_value = function()
+	local restore_to = set_yaml_as_filetype()
+	local node = document.get_key_relevant_to_cursor()
+	if node == nil then
+		return
+	end
+	local parsed = pair.parse(node)
+	restore_filetype(restore_to)
+	return parsed.human
 end
 
 M.yank = function(register)
