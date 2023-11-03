@@ -79,14 +79,11 @@ M.get_yaml_key_and_value = function()
 end
 
 M.get_yaml_key = function()
-	local restore_to = set_yaml_as_filetype()
-	local node = document.get_key_relevant_to_cursor()
+	local node = get_current_yaml_node()
 	if node == nil then
 		return
 	end
-	local parsed = pair.parse(node)
-	restore_filetype(restore_to)
-	return parsed.key
+	return node.key
 end
 
 M.yank = function(register)
