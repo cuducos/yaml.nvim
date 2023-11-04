@@ -16,6 +16,11 @@ local contains = function(tbl, item)
 end
 
 describe("setup", function()
+	it("loads the lua module", function()
+		local yaml = require("yaml_nvim")
+		assert(yaml ~= nil, [[expected require("yaml_nvim") not to be nil, got nil]])
+	end)
+
 	it("makes commands available", function()
 		require("yaml_nvim")
 

@@ -1,0 +1,15 @@
+describe("functions", function()
+	before_each(function()
+		vim.cmd(":e tests/sample.yaml")
+		vim.cmd(":norm 10j^")
+	end)
+
+	after_each(function()
+		vim.cmd(":bw!")
+	end)
+
+	it("get_yaml_key_and_value returns the human-readable text", function()
+		local got = require("yaml_nvim").get_yaml_key_and_value()
+		assert.are.equal("worldcup.semifinals[0].germany = 7", got)
+	end)
+end)

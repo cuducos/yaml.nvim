@@ -26,6 +26,7 @@ end
 
 vim.opt.rtp:append(".")
 vim.cmd("runtime plugin/yaml.vim")
+vim.cmd("set noswapfile")
 
 require("nvim-treesitter.configs").setup({ ensure_installed = { "yaml" }, sync_install = true })
 require("plenary.busted")
