@@ -78,6 +78,14 @@ M.get_yaml_key_and_value = function()
 	return node.human
 end
 
+M.get_yaml_key = function()
+	local node = get_current_yaml_node()
+	if node == nil then
+		return
+	end
+	return node.key
+end
+
 M.yank = function(register)
 	yank(get_current_yaml_node(), true, true, register)
 end
