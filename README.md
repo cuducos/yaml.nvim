@@ -74,15 +74,6 @@ Plug 'cuducos/yaml.nvim'
 #### Neovim's winbar
 
 ```lua
--- Get yaml key
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "yaml" },
-	callback = function()
-		vim.opt_local.winbar = [[%{%v:lua.require("yaml_nvim").get_yaml_key()%}]]
-	end,
-})
-
--- Get yaml key and value
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "yaml" },
 	callback = function()
@@ -90,6 +81,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 ```
+
+ You can also call `get_yaml_key()` instead of `get_yaml_key_and_value()` to show only the YAML key.
 
 #### Neovim's statusline (with [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim))
 
