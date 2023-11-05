@@ -74,10 +74,10 @@ Plug 'cuducos/yaml.nvim'
 #### Neovim's winbar
 
 ```lua
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
 	pattern = { "yaml" },
 	callback = function()
-		vim.opt_local.winbar = [[%{%v:lua.require("yaml_nvim").get_yaml_key_and_value()%}]]
+		vim.opt_local.winbar = require("yaml_nvim").get_yaml_key_and_value()
 	end,
 })
 ```
