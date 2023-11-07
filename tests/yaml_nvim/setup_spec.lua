@@ -37,4 +37,33 @@ describe("setup", function()
 			assert(contains(cmds, cmd), cmd .. " not found")
 		end
 	end)
+
+	it("uses default config when required", function()
+		local yaml = require("yaml_nvim")
+		assert.are.same(yaml.config, yaml.default_config)
+	end)
+
+	it("uses default config when setup is not called", function()
+		local yaml = require("yaml_nvim")
+		assert.are.same(yaml.config, yaml.default_config)
+	end)
+
+	it("uses default config when setup is called with no arguments", function()
+		local yaml = require("yaml_nvim")
+		yaml.setup()
+		assert.are.same(yaml.config, yaml.default_config)
+	end)
+
+	it("uses default config when setup is called with empty table", function()
+		local yaml = require("yaml_nvim")
+		yaml.setup({})
+		assert.are.same(yaml.config, yaml.default_config)
+	end)
+
+	it("set up uses custom config", function()
+		local yaml = require("yaml_nvim")
+		local custom_config = { ft = { "not-my-yaml" } }
+		yaml.setup(custom_config)
+		assert.are.same(yaml.config, custom_config)
+	end)
 end)

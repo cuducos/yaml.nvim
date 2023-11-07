@@ -69,6 +69,16 @@ Plug 'cuducos/yaml.nvim'
 
 ## Configuration
 
+### File types
+
+The plugin ignores other file types than YAML. By now the list of YAML file types includes `yaml` and `eruby.yaml` — we're are open to enhance this list, so PRs are welcomed.
+
+If you want to manually change this list, you can pass a custom config:
+
+```lua
+require("yaml_nvim").setup({ ft = { "yaml",  "other yaml filetype" } })
+```
+
 ### Showing the YAML path and value
 
 #### Neovim's winbar

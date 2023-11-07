@@ -1,7 +1,17 @@
 local has_telescope, _ = pcall(require, "telescope")
 local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
-local M = {}
+
+local is_yaml = function()
+	local curr = vim.bo.filetype
+	for _, ft in ipairs(M.config.ft) do
+		if curr == ft then
+			return true
+		end
+	end
+
+	return false
+end
 
 local set_yaml_as_filetype = function()
 	local expected = "yaml"
@@ -22,6 +32,10 @@ local restore_filetype = function(restore_to)
 end
 
 local get_current_yaml_node = function()
+	if not is_yaml() then
+		return
+	end
+
 	local restore_to = set_yaml_as_filetype()
 
 	local node = document.get_key_relevant_to_cursor()
@@ -58,6 +72,29 @@ local yank = function(node, key, value, register)
 	contents = string.gsub(contents, "\n", ", ")
 	contents = string.gsub(contents, "\r", "")
 	vim.fn.setreg(register, contents)
+end
+
+-- Public API
+
+M = {}
+
+M.default_config = {
+	ft = { "yaml", "eruby.yaml" },
+}
+
+M.config = vim.deepcopy(M.default_config)
+
+M.setup = function(opts)
+	if opts == nil then
+		return
+	end
+
+	for k, _ in pairs(M.default_config) do
+		local custom = opts[k]
+		if custom ~= nil then
+			M.config[k] = custom
+		end
+	end
 end
 
 M.view = function()
@@ -99,6 +136,10 @@ M.yank_value = function(register)
 end
 
 M.quickfix = function()
+	if not is_yaml() then
+		return
+	end
+
 	local restore_to = set_yaml_as_filetype()
 	local lines = {}
 
@@ -121,6 +162,8 @@ M.telescope = function()
 	M.quickfix()
 	require("telescope.builtin").quickfix()
 end
+
+-- Commands
 
 vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
 vim.cmd("command! -nargs=? YAMLYank lua require('yaml_nvim').yank(<f-args>)")
