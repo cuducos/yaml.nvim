@@ -28,21 +28,26 @@ end
 local function get_value(node, bufnr)
 	while node ~= nil do
 		if node:type() == "block_mapping_pair" then
-			local value = node:field("value")[1]
-			return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
+			if node:field("value")[1] ~= nil then
+				local value = node:field("value")[1]
+				return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
+			end
 		end
-
 		node = node:parent()
 	end
 end
 
 local function is_sequence_block(value)
-	if value:type() ~= "block_node" then
-		return false
-	end
+	if value then
+		if value:type() ~= "block_node" then
+			return false
+		end
 
-	for block_sequence, _ in value:iter_children() do
-		return block_sequence:type() == "block_sequence"
+		for block_sequence, _ in value:iter_children() do
+			return block_sequence:type() == "block_sequence"
+		end
+	else
+		return false
 	end
 end
 
