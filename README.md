@@ -85,7 +85,7 @@ require("yaml_nvim").setup({ ft = { "yaml",  "other yaml filetype" } })
 
 ```lua
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
-	pattern = { "yaml" },
+	pattern = { "*.yaml" },
 	callback = function()
 		vim.opt_local.winbar = require("yaml_nvim").get_yaml_key_and_value()
 	end,
