@@ -9,7 +9,7 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 | `:YAMLView` | `yaml.view()` | Shows the full path and value of the current key/value pair |
 | `:YAMLYank [register]` | `yaml.yank_all([register])` | Yanks the full path and value of the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLYankKey [register]` | `yaml.yank_key([register])`  | Yanks the full path of the key for the current key/value pair. The default register is the unnamed one (`"`) |
-| `:YAMLYankValue [regster]` | `yaml.yank_value([register])`  | Yanks the value of the current key/value pair. The default register is the unnamed one (`"`) |
+| `:YAMLYankValue [register]` | `yaml.yank_value([register])`  | Yanks the value of the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLQuickfix` | `yaml.quickfix()` | Generates a quickfix with key/value pairs |
 | `:YAMLTelescope` | `yaml.telescope()`  | Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
 
