@@ -16,6 +16,9 @@ local function reverse(keys)
 end
 
 local function clean_up_block_value(value)
+	if value == nil then
+		return
+	end
 	value = string.gsub(value, "\n", " ")
 
 	if value:sub(1, 1) ~= "|" then
