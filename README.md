@@ -47,9 +47,10 @@ Telescope is **optional**.
 ```
 
 <details>
-<summary>If you get a <code>no parser for 'yaml' language</code> error message when calling <code>:YAMLTelescope</code></summary>
+
+<summary>If you get a <code>no parser for 'yaml' language</code> error message</summary>
 	
-This means that you need to install a parser such as [<code>tree-sitter-yaml</code>](https://github.com/ikatyang/tree-sitter-yaml).
+This means that you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml).
 
 Then you need to enable it in your nvim config. Here is an example.
 
@@ -60,14 +61,10 @@ Then you need to enable it in your nvim config. Here is an example.
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = { "yaml" },
-      highlight = {
-        enable = true,
-        disable = {},
       },
   })
   end,
 }
-```
 </details>
 
 ### With [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
