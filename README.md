@@ -46,6 +46,27 @@ Telescope is **optional**.
 }
 ```
 
+<details>
+
+<summary>If you get a <code>no parser for 'yaml' language</code> error message</summary>
+	
+This means that you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml).
+
+Then you need to enable it in your nvim config. Here is an example.
+
+```lua
+{
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = { "yaml" },
+      },
+  })
+  end,
+}
+</details>
+
 ### With [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
 
 ```lua
@@ -85,25 +106,24 @@ require("yaml_nvim").setup({ ft = { "yaml",  "other yaml filetype" } })
 
 ```lua
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
-	pattern = { "*.yaml" },
-	callback = function()
-		vim.opt_local.winbar = require("yaml_nvim").get_yaml_key_and_value()
-	end,
+  pattern = { "*.yaml" },
+  callback = function()
+    vim.opt_local.winbar = require("yaml_nvim").get_yaml_key_and_value()
+  end,
 })
 ```
 
- You can also call `get_yaml_key()` instead of `get_yaml_key_and_value()` to show only the YAML key.
+You can also call `get_yaml_key()` instead of `get_yaml_key_and_value()` to show only the YAML key.
 
 #### Neovim's statusline (with [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim))
 
 ```lua
 require("lualine").setup({
-	sections = {
-		lualine_x = { require("yaml_nvim").get_yaml_key_and_value },
-		-- etc
-    }
+  sections = {
+    lualine_x = { require("yaml_nvim").get_yaml_key_and_value },
+    -- etc
+  }
 })
-
 ```
 
 ## Reporting bugs and contributing
