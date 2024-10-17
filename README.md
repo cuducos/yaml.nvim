@@ -46,26 +46,6 @@ Telescope is **optional**.
 }
 ```
 
-<details>
-
-<summary>If you get a <code>no parser for 'yaml' language</code> error message</summary>
-	
-This means that you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml).
-
-Then you need to enable it in your nvim config. Here is an example.
-
-```lua
-{
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = { "yaml" },
-      },
-  })
-  end,
-}
-</details>
 
 ### With [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
 
@@ -87,6 +67,29 @@ Plug 'nvim-telescope/telescope.nvim' " optional
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'cuducos/yaml.nvim'
 ```
+
+### No YAML parser?
+
+If you get a <code>no parser for 'yaml' language</code> error message, this means that you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml). If that is the case, you need to enable it in your config.
+
+<details>
+
+<summary>Here is an example, using <code>lazy.nvim</code></summary>
+
+```lua
+{
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = { "yaml" },
+      },
+  })
+  end,
+}
+```
+
+</details>
 
 ## Configuration
 
