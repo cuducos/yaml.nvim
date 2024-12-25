@@ -113,7 +113,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   callback = function()
     vim.api.nvim_create_autocmd({ "CursorMoved" }, {
       callback = function()
-        vim.opt_local.winbar = "." .. (require("yaml_nvim").get_yaml_key() or "")
+        vim.opt_local.winbar = require("yaml_nvim").get_yaml_key()
       end,
     })
   end,
