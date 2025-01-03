@@ -108,14 +108,10 @@ require("yaml_nvim").setup({ ft = { "yaml",  "other yaml filetype" } })
 #### Neovim's winbar
 
 ```lua
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "yaml" },
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
+  pattern = { "*.yaml" },
   callback = function()
-    vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-      callback = function()
-        vim.opt_local.winbar = require("yaml_nvim").get_yaml_key()
-      end,
-    })
+    vim.opt_local.winbar = require("yaml_nvim").get_yaml_key_and_value()
   end,
 })
 ```
