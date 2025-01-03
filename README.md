@@ -122,7 +122,7 @@ You can also call `get_yaml_key()` instead of `get_yaml_key_and_value()` to show
 
 <summary>For non-named buffers</summary>
 
-See #33, for example:
+See [#33](https://github.com/cuducos/yaml.nvim/pull/33), for example:
 
 ```lua
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
