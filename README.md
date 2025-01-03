@@ -118,6 +118,33 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
 
 You can also call `get_yaml_key()` instead of `get_yaml_key_and_value()` to show only the YAML key.
 
+<details>
+
+<summary>For non-named buffers</summary>
+
+See #33, for example:
+
+```lua
+vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+  group = vim.api.nvim_create_augroup("bufent_winbar", { clear = true }),
+  callback = function(opts)
+    if vim.bo[opts.buf].filetype == "yaml" then
+      vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+        group = vim.api.nvim_create_augroup("curs_winbar", { clear = true }),
+        callback = function()
+          vim.opt_local.winbar = require("yaml_nvim").get_yaml_key_and_value()
+        end,
+      })
+    else
+      vim.opt_local.winbar = ""
+      vim.api.nvim_create_augroup("curs_winbar", { clear = true })
+    end
+  end,
+})
+```
+
+</details>
+
 #### Neovim's statusline (with [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim))
 
 ```lua
