@@ -76,7 +76,7 @@ end
 
 -- Public API
 
-M = {}
+local M = {}
 
 M.default_config = {
 	ft = { "yaml", "eruby.yaml" },
