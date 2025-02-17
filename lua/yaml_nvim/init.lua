@@ -2,6 +2,8 @@ local has_telescope, _ = pcall(require, "telescope")
 local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
 
+local M = {}
+
 local is_yaml = function()
 	local curr = vim.bo.filetype
 	for _, ft in ipairs(M.config.ft) do
@@ -75,8 +77,6 @@ local yank = function(node, key, value, register)
 end
 
 -- Public API
-
-M = {}
 
 M.default_config = {
 	ft = { "yaml", "eruby.yaml" },
