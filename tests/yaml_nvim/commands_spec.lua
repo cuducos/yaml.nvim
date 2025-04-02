@@ -57,6 +57,12 @@ describe("Neovim commands:", function()
 		assert.stub(qf).was_called_with()
 	end)
 
+	it("YAMLSnacks calls Lua function", function()
+		local snacks = stub(require("yaml_nvim"), "snacks")
+		vim.cmd("YAMLSnacks")
+		assert.stub(snacks).was_called_with()
+	end)
+
 	it("YAMLTelescope calls Lua function", function()
 		local telescope = stub(require("yaml_nvim"), "telescope")
 		vim.cmd("YAMLTelescope")

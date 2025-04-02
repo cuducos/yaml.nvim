@@ -57,6 +57,14 @@ describe("Lua functions with sample YAML:", function()
 		assert.are.equal("7", vim.fn.getreg("7"))
 	end)
 
+	it("snacks calls Snacks's native quickfix function", function()
+		stub(vim.fn, "setqflist")
+		local snacks = require("snacks")
+		local qflist = spy.on(snacks.picker, "qflist")
+		require("yaml_nvim").snacks()
+		assert.spy(qflist).was.called()
+	end)
+
 	it("telescope calls Telescope's native quickfix function", function()
 		stub(vim.fn, "setqflist")
 		local telescope = spy.on(require("telescope.builtin"), "quickfix")
@@ -85,14 +93,14 @@ describe("Lua functions with simple YAML:", function()
 			{
 				bufnr = bufnr,
 				col = 0,
-				lnum = 0,
+				lnum = 1,
 				text = "answer = 42",
 				valid = 1,
 			},
 			{
 				bufnr = bufnr,
 				col = 0,
-				lnum = 1,
+				lnum = 2,
 				text = "question = null",
 				valid = 1,
 			},

@@ -1,4 +1,5 @@
 local has_telescope, _ = pcall(require, "telescope")
+local has_snacks, _ = pcall(require, "snacks")
 local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
 
@@ -163,6 +164,15 @@ M.telescope = function()
 	require("telescope.builtin").quickfix()
 end
 
+M.snacks = function()
+	if not has_snacks then
+		return
+	end
+
+	M.quickfix()
+	require("snacks").picker.qflist()
+end
+
 -- Commands
 
 vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
@@ -173,6 +183,10 @@ vim.cmd("command! YAMLQuickfix lua require('yaml_nvim').quickfix()")
 
 if has_telescope then
 	vim.cmd("command! YAMLTelescope lua require('yaml_nvim').telescope()")
+end
+
+if has_snacks then
+	vim.cmd("command! YAMLSnacks lua require('yaml_nvim').snacks()")
 end
 
 return M

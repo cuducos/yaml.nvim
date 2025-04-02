@@ -11,6 +11,7 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 | `:YAMLYankKey [register]` | `yaml.yank_key([register])`  | Yanks the full path of the key for the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLYankValue [register]` | `yaml.yank_value([register])`  | Yanks the value of the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLQuickfix` | `yaml.quickfix()` | Generates a quickfix with key/value pairs |
+| `:YAMLSnacks` | `yaml.snacks()` | Full path key/value fuzzy finder via [Snacks](https://github.com/folke/snacks.nvim) **if installed** |
 | `:YAMLTelescope` | `yaml.telescope()`  | Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
 
 ![Example GIF](doc/demo.gif)
@@ -20,7 +21,7 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 * **Neovim 0.9** or newer
 * [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) with [YAML support](https://github.com/ikatyang/tree-sitter-yaml)
 
-Telescope is **optional**.
+Snacks and Telescope are **optional**.
 
 <details>
 
@@ -41,11 +42,11 @@ Telescope is **optional**.
   ft = { "yaml" }, -- optional
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
+    "folke/snacks.nvim", -- optional
     "nvim-telescope/telescope.nvim", -- optional
   },
 }
 ```
-
 
 ### With [`packer.nvim`](https://github.com/wbthomason/packer.nvim):
 
@@ -55,6 +56,7 @@ use {
   ft = { "yaml" }, -- optional
   requires = {
     "nvim-treesitter/nvim-treesitter",
+    "folke/snacks.nvim", -- optional
     "nvim-telescope/telescope.nvim" -- optional
   },
 }
@@ -63,6 +65,7 @@ use {
 ### With [`vim-plug`](https://github.com/junegunn/vim-plug):
 
 ```viml
+Plug 'folke/snacks.nvim' " optional
 Plug 'nvim-telescope/telescope.nvim' " optional
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'cuducos/yaml.nvim'

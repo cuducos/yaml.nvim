@@ -3,9 +3,7 @@
 ==============================================================================
 USAGE INSTRUCTIONS                                           *yaml.nvim-usage*
 
-This plugins offers the following commands and, if |:telescope.nvim| is
-available, an extension reached by `:Telescope yaml` to navigate through the
-YAML loaded in the current buffer.
+This plugins offers the following commands:
 
 :YAMLView                                                          *:YAMLView*
 
@@ -44,6 +42,11 @@ YAML loaded in the current buffer.
     collects all nested keys and outputs them as a dot-case string (e.g.:
     `root.parent.child.key = value`). It uses Vim's native |:cex| function, so
     the cursor is positioned in the first selection of the |:quickfix|.
+
+:YAMLSnacks                                                       *YAMLSnacks*
+
+    Creates a |:quickfix| list as in |:YAMLQuickfix|, and loads it with
+    |:Snacks.picker|. Only available if |:Snacks| is installed.
 
 :YAMLTelescope                                                 *YAMLTelescope*
 

@@ -17,6 +17,7 @@ end
 
 local dependencies = {
 	"nvim-lua/plenary.nvim",
+	"folke/snacks.nvim",
 	"nvim-treesitter/nvim-treesitter",
 	"nvim-telescope/telescope.nvim",
 }

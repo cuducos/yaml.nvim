@@ -108,7 +108,7 @@ M.parse = function(node)
 		quickfix = {
 			bufnr = bufnr,
 			col = col,
-			lnum = line,
+			lnum = line + 1,
 			text = human,
 			valid = 1,
 		},
