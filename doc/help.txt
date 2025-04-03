@@ -53,3 +53,9 @@ This plugins offers the following commands:
     Creates a |:quickfix| list as in |:YAMLQuickfix|, and loads it with
     |:telescope.nvim| using |:telescope.builtin|'s `quickfix()` function. Only
     available if |:telescope.nvim| is installed.
+
+:YAMLFzfLua                                                       *YAMLFzfLua*
+
+    Creates a |:quickfix| list as in |:YAMLQuickfix|, and loads it with
+    |:fzf-lua|'s `quickfix()` function. Only available if |:fzf-lua| is
+    installed.

@@ -16,10 +16,11 @@ local install_from_github = function(uri)
 end
 
 local dependencies = {
-	"nvim-lua/plenary.nvim",
 	"folke/snacks.nvim",
-	"nvim-treesitter/nvim-treesitter",
+	"ibhagwan/fzf-lua",
+	"nvim-lua/plenary.nvim",
 	"nvim-telescope/telescope.nvim",
+	"nvim-treesitter/nvim-treesitter",
 }
 for _, dep in pairs(dependencies) do
 	install_from_github(dep)

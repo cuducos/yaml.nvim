@@ -1,5 +1,6 @@
-local has_telescope, _ = pcall(require, "telescope")
-local has_snacks, _ = pcall(require, "snacks")
+local has_snacks, snacks = pcall(require, "snacks")
+local has_telescope, telescope = pcall(require, "telescope.builtin")
+local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
 local document = require("yaml_nvim.document")
 local pair = require("yaml_nvim.pair")
 
@@ -155,22 +156,31 @@ M.quickfix = function()
 	vim.fn.setqflist(lines)
 end
 
-M.telescope = function()
-	if not has_telescope then
-		return
-	end
-
-	M.quickfix()
-	require("telescope.builtin").quickfix()
-end
-
 M.snacks = function()
 	if not has_snacks then
 		return
 	end
 
 	M.quickfix()
-	require("snacks").picker.qflist()
+	snacks.picker.qflist()
+end
+
+M.telescope = function()
+	if not has_telescope then
+		return
+	end
+
+	M.quickfix()
+	telescope.quickfix()
+end
+
+M.fzf_lua = function()
+	if not has_fzf_lua then
+		return
+	end
+
+	M.quickfix()
+	fzf_lua.quickfix()
 end
 
 -- Commands
@@ -181,12 +191,16 @@ vim.cmd("command! -nargs=? YAMLYankKey lua require('yaml_nvim').yank_key(<f-args
 vim.cmd("command! -nargs=? YAMLYankValue lua require('yaml_nvim').yank_value(<f-args>)")
 vim.cmd("command! YAMLQuickfix lua require('yaml_nvim').quickfix()")
 
+if has_snacks then
+	vim.cmd("command! YAMLSnacks lua require('yaml_nvim').snacks()")
+end
+
 if has_telescope then
 	vim.cmd("command! YAMLTelescope lua require('yaml_nvim').telescope()")
 end
 
-if has_snacks then
-	vim.cmd("command! YAMLSnacks lua require('yaml_nvim').snacks()")
+if has_fzf_lua then
+	vim.cmd("command! YAMLFzfLua lua require('yaml_nvim').fzf_lua()")
 end
 
 return M

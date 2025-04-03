@@ -13,6 +13,7 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 | `:YAMLQuickfix` | `yaml.quickfix()` | Generates a quickfix with key/value pairs |
 | `:YAMLSnacks` | `yaml.snacks()` | Full path key/value fuzzy finder via [Snacks](https://github.com/folke/snacks.nvim) **if installed** |
 | `:YAMLTelescope` | `yaml.telescope()`  | Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |
+| `:YAMLFzfLua` | `yaml.fzf_lua()`  | Full path key/value fuzzy finder via [fzf-lua](https://github.com/ibhagwan/fzf-lua) **if installed** |
 
 ![Example GIF](doc/demo.gif)
 
@@ -21,7 +22,7 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 * **Neovim 0.9** or newer
 * [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) with [YAML support](https://github.com/ikatyang/tree-sitter-yaml)
 
-Snacks and Telescope are **optional**.
+Snacks, Telescope and fzf-lua are **optional**.
 
 <details>
 
@@ -44,6 +45,7 @@ Snacks and Telescope are **optional**.
     "nvim-treesitter/nvim-treesitter",
     "folke/snacks.nvim", -- optional
     "nvim-telescope/telescope.nvim", -- optional
+    "ibhagwan/fzf-lua" -- optional
   },
 }
 ```
@@ -58,6 +60,7 @@ use {
     "nvim-treesitter/nvim-treesitter",
     "folke/snacks.nvim", -- optional
     "nvim-telescope/telescope.nvim" -- optional
+    "ibhagwan/fzf-lua" --optional
   },
 }
 ```
@@ -67,6 +70,7 @@ use {
 ```viml
 Plug 'folke/snacks.nvim' " optional
 Plug 'nvim-telescope/telescope.nvim' " optional
+Plug 'ibhagwan/fzf-lua' " optional
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'cuducos/yaml.nvim'
 ```
