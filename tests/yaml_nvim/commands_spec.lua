@@ -51,6 +51,18 @@ describe("Neovim commands:", function()
 		assert.stub(yank_value).was_called_with("8")
 	end)
 
+	it("YAMLHighlight calls Lua function for highlighting", function()
+		local highlight = stub(require("yaml_nvim"), "highlight")
+		vim.cmd("YAMLHighlight worldcup.intro")
+		assert.stub(highlight).was_called_with("worldcup.intro")
+	end)
+
+	it("YAMLRemoveHighlight calls Lua function for removing highlight", function()
+		local remove = stub(require("yaml_nvim"), "remove_highlight")
+		vim.cmd("YAMLRemoveHighlight")
+		assert.stub(remove).was_called_with()
+	end)
+
 	it("YAMLQuickfix calls Lua function", function()
 		local qf = stub(require("yaml_nvim"), "quickfix")
 		vim.cmd("YAMLQuickfix")

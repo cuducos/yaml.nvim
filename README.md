@@ -10,6 +10,8 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 | `:YAMLYank [register]` | `yaml.yank_all([register])` | Yanks the full path and value of the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLYankKey [register]` | `yaml.yank_key([register])`  | Yanks the full path of the key for the current key/value pair. The default register is the unnamed one (`"`) |
 | `:YAMLYankValue [register]` | `yaml.yank_value([register])`  | Yanks the value of the current key/value pair. The default register is the unnamed one (`"`) |
+| `:YAMLHighlight <key>` | `yaml.highlight(key)`  | Highlights the line(s) of an YAML `key` |
+| `:YAMLRemoveHighlight` | `yaml.remove_highlight()`  | Removes the highlight created by `:YAMLHighlight`/`yaml.highlight(key)` |
 | `:YAMLQuickfix` | `yaml.quickfix()` | Generates a quickfix with key/value pairs |
 | `:YAMLSnacks` | `yaml.snacks()` | Full path key/value fuzzy finder via [Snacks](https://github.com/folke/snacks.nvim) **if installed** |
 | `:YAMLTelescope` | `yaml.telescope()`  | Full path key/value fuzzy finder via [Telescope](https://github.com/nvim-telescope/telescope.nvim) **if installed** |

@@ -28,16 +28,20 @@ local function clean_up_block_value(value)
 	return trim(string.gsub(value:sub(2, #value), "%s+", " "))
 end
 
-local function get_value(node, bufnr)
+local function get_value_node(node)
 	while node ~= nil do
 		if node:type() == "block_mapping_pair" then
 			if node:field("value")[1] ~= nil then
-				local value = node:field("value")[1]
-				return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
+				return node
 			end
 		end
 		node = node:parent()
 	end
+end
+
+local function get_value(node, bufnr)
+	local value = node:field("value")[1]
+	return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
 end
 
 local function is_sequence_block(value)
@@ -96,19 +100,22 @@ end
 M.parse = function(node)
 	local bufnr = vim.api.nvim_get_current_buf()
 	local key = get_keys(node, bufnr)
-	local value = get_value(node, bufnr)
-	local line, col = node:start()
+	local value_node = get_value_node(node)
+	local value = get_value(value_node, bufnr)
 	local cleaned_value = clean_up_block_value(value)
 	local human = string.format("%s = %s", key, cleaned_value)
+	local start_line, start_col = node:start()
+	local end_line, _ = value_node:end_()
 
 	return {
 		key = key,
 		cleaned_value = cleaned_value,
 		human = human,
+		lines = { start_line + 1, end_line + 1 },
 		quickfix = {
 			bufnr = bufnr,
-			col = col,
-			lnum = line + 1,
+			col = start_col,
+			lnum = start_line + 1,
 			text = human,
 			valid = 1,
 		},

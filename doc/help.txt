@@ -35,6 +35,15 @@ This plugins offers the following commands:
     Yanks the value of the key/value pair under the cursor to the selected
     register. The default register is the unnamed one (see |:quotequote|).
 
+:YAMLHighlight <key>                                          *:YAMLHighlight*
+
+    Highlights the line(s) of the provided YAML key. The key should match
+    the output format used in |:YAMLViem|.
+
+:YAMLRemoveHighlight                                    *:YAMLRemoveHighlight*
+
+    Removes the highlight created by |:YAMLHighlight|.
+
 :YAMLQuickfix                                                   *YAMLQuickfix*
 
     Creates a |:quickfix| list with the contents of the YAML, showing the full

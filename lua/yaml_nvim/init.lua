@@ -137,6 +137,49 @@ M.yank_value = function(register)
 	yank(get_current_yaml_node(), false, true, register)
 end
 
+M.current_highlight = nil
+
+M.highlight = function(key)
+	if not is_yaml() then
+		return
+	end
+
+	local restore_to = set_yaml_as_filetype()
+
+	local target = nil
+	for _, node in pairs(document.all_keys()) do
+		if not document.is_value_a_block(node) then
+			local parsed = pair.parse(node)
+			if parsed.key == key then
+				target = parsed
+				break
+			end
+		end
+	end
+	if target == nil then
+		vim.notify(key .. " not found")
+		return
+	end
+
+	local pattern = "\\%" .. target.lines[1] .. "l"
+	if target.lines[2] > target.lines[1] then
+		pattern = "\\%>" .. target.lines[1] .. "l\\%<" .. target.lines[2] .. "l"
+	end
+
+	M.remove_highlight()
+	M.current_highlight = vim.fn.matchadd("Visual", pattern)
+	restore_filetype(restore_to)
+end
+
+M.remove_highlight = function()
+	if M.current_highlight == nil then
+		return
+	end
+
+	vim.fn.matchdelete(M.current_highlight)
+	M.current_highlight = nil
+end
+
 M.quickfix = function()
 	if not is_yaml() then
 		return
@@ -189,6 +232,8 @@ vim.cmd("command! YAMLView lua require('yaml_nvim').view()")
 vim.cmd("command! -nargs=? YAMLYank lua require('yaml_nvim').yank(<f-args>)")
 vim.cmd("command! -nargs=? YAMLYankKey lua require('yaml_nvim').yank_key(<f-args>)")
 vim.cmd("command! -nargs=? YAMLYankValue lua require('yaml_nvim').yank_value(<f-args>)")
+vim.cmd("command! -nargs=? YAMLHighlight lua require('yaml_nvim').highlight(<f-args>)")
+vim.cmd("command! YAMLRemoveHighlight lua require('yaml_nvim').remove_highlight()")
 vim.cmd("command! YAMLQuickfix lua require('yaml_nvim').quickfix()")
 
 if has_snacks then
