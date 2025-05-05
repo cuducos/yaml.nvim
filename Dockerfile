@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim AS neovim
+FROM debian:bookworm-slim AS neovim
 ARG NVIM_VERSION
 ENV NVIM_VERSION=${NVIM_VERSION:-stable}
 ENV BUILD_REQUIREMENTS "cmake curl gcc gettext git ninja-build unzip"
@@ -12,10 +12,10 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
-FROM rust:slim-bullseye AS tree-sitter-cli
+FROM rust:slim-bookworm AS tree-sitter-cli
 RUN cargo install tree-sitter-cli
 
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 COPY --from=neovim /usr/local/share/nvim /usr/local/share/nvim
 COPY --from=neovim /usr/local/lib/nvim /usr/local/lib/nvim
 COPY --from=neovim /usr/local/bin/nvim /usr/local/bin/nvim
