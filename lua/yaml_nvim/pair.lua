@@ -40,12 +40,11 @@ local function get_value_node(node)
 end
 
 local function get_value(node, bufnr)
-	if node ~= nil then
-		local value = node:field("value")[1]
-		return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
-	else
+	if node == nil then
 		return ""
 	end
+	local value = node:field("value")[1]
+	return table.concat({ vim.treesitter.get_node_text(value, bufnr) }, "\n")
 end
 
 local function is_sequence_block(value)
@@ -110,7 +109,7 @@ M.parse = function(node)
 	local human = string.format("%s = %s", key, cleaned_value)
 	local start_line, start_col = node:start()
 	local end_line = start_line
-	if value_node then
+	if value_node ~= nil then
 		end_line, _ = value_node:end_()
 	end
 

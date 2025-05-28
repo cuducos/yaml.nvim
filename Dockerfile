@@ -22,7 +22,7 @@ COPY --from=neovim /usr/local/bin/nvim /usr/local/bin/nvim
 COPY --from=tree-sitter-cli /usr/local/cargo/bin/tree-sitter /usr/local/bin/tree-sitter
 
 RUN apt-get update && \
-    apt-get install -y curl g++ git && \
+    apt-get install -y curl fzf g++ git && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
     useradd -ms /bin/bash yaml

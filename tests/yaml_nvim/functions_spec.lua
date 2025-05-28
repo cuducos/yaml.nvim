@@ -4,7 +4,7 @@ local stub = require("luassert.stub")
 describe("Lua functions with sample YAML:", function()
 	before_each(function()
 		vim.cmd(":e tests/sample.yaml")
-		vim.cmd(":norm 10j^")
+		vim.cmd(":norm 12j^")
 	end)
 
 	after_each(function()
