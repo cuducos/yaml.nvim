@@ -1,4 +1,3 @@
-local ts_utils = require("nvim-treesitter.ts_utils")
 local M = {}
 
 local function get_keys(root)

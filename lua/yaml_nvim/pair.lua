@@ -1,5 +1,20 @@
-local ts_utils = require("nvim-treesitter.ts_utils")
 local M = {}
+
+-- ported from nvim-treestter master branch (to be deprecated)
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/42fc28ba918343ebfd5565147a42a26580579482/lua/nvim-treesitter/ts_utils.lua#L72-L90
+function is_parent(dest, source)
+	if not (dest and source) then
+		return false
+	end
+	local current = source
+	while current ~= nil do
+		if current == dest then
+			return true
+		end
+		current = current:parent()
+	end
+	return false
+end
 
 local function trim(value)
 	return (value:gsub("^%s*(.-)%s*$", "%1"))
@@ -65,7 +80,7 @@ local function get_sequence_index(block, key)
 	for block_sequence, _ in block:iter_children() do
 		local index = 0
 		for block_sequence_item, _ in block_sequence:iter_children() do
-			if ts_utils.is_parent(block_sequence_item, key) then
+			if is_parent(block_sequence_item, key) then
 				return index
 			end
 			index = index + 1
