@@ -78,7 +78,7 @@ Plug 'cuducos/yaml.nvim'
 
 If you get a <code>no parser for 'yaml' language</code> error message, this means that you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml). From [Neovim's official `treesitter` docs](https://neovim.viio/doc/user/treesitter.html):
 
-> You can install more parsers manually, or with a plugin like [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)”
+> You can install more parsers manually, or with a plugin like [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
 
 <details>
 
