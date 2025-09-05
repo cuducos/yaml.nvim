@@ -22,7 +22,7 @@ Assuming `yaml = require("yaml_nvim")` for the Lua API:
 ## Requirements
 
 * **Neovim 0.9** or newer
-* [YAML support](https://github.com/ikatyang/tree-sitter-yaml) in [`treesitter`](https://neovim.viio/doc/user/treesitter.html)
+* [YAML support](https://github.com/ikatyang/tree-sitter-yaml) in [`treesitter`](https://neovim.viio/doc/user/treesitter.html) — more on [No YAML parser?](#no-yaml-parser) bellow
 
 [Snacks](https://github.com/folke/snacks.nvim), [Telescope](https://github.com/nvim-telescope/telescope.nvim) and [fzf-lua](https://github.com/ibhagwan/fzf-lua) are **optional**.
 
@@ -76,7 +76,7 @@ Plug 'cuducos/yaml.nvim'
 
 ### No YAML parser?
 
-If you get a <code>no parser for 'yaml' language</code> error message, this means that you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml). From [Neovim's official `treesitter` docs](https://neovim.viio/doc/user/treesitter.html):
+If you get a <code>no parser for 'yaml' language</code> error message, this means you need to install a parser such as [`tree-sitter-yaml`](https://github.com/ikatyang/tree-sitter-yaml). From [Neovim's official `treesitter` docs](https://neovim.viio/doc/user/treesitter.html):
 
 > You can install more parsers manually, or with a plugin like [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
 
