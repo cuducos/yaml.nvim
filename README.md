@@ -59,8 +59,8 @@ use {
   ft = { "yaml" }, -- optional
   requires = {
     "folke/snacks.nvim", -- optional
-    "nvim-telescope/telescope.nvim" -- optional
-    "ibhagwan/fzf-lua" --optional
+    "nvim-telescope/telescope.nvim", -- optional
+    "ibhagwan/fzf-lua", -- optional
   },
 }
 ```
